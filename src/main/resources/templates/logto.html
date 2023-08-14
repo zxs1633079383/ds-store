@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Kodinger">
+    <title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
+    <!--	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+    <!--	<link rel="stylesheet" type="text/css" href="css/my-login.css">-->
+
+    <link rel="stylesheet" type="text/css" th:href="@{~/css/bootstrap.min.css}" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{~/css/my-login.css}" href="css/my-login.css">
+</head>
+<body class="my-login-page">
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="brand">
+                    <!--						<img src="img/logoper.jpg">-->
+                    <img th:src="@{~/img/logoper.jpg}" src="img/logoper.jpg">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">用户注册</h4>
+                        <form method="POST" action="/user/register">
+
+                            <div class="form-group">
+                                <label for="user">用户名：</label>
+                                <input id="user" th:value="${logtouser}" type="text" class="form-control" name="user"
+                                       required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">密码：</label>
+                                <input id="pwd" th:value="${logtopwd}" type="password" class="form-control" name="pwd"
+                                       required data-eye>
+                            </div>
+                            <div class="form-group">
+                                <label for="qqname">QQ号码：</label>
+                                <input id="qqname" th:value="${logtoqq}" type="number" class="form-control"
+                                       name="qqname" required>
+                            </div>
+
+<!--                            <div class="form-group">-->
+<!--                                <label for="key"><font color="red">VIP邀请码：</font> </label>-->
+<!--                                <input id="key" th:value="${logtokeymi}" type="text" class="form-control" name="key"-->
+<!--                                       required autofocus>-->
+<!--                            </div>-->
+
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="aggree" value="1"> 我已阅读并接受用户协议&nbsp;<a href="">点击查看</a>
+                                </label>
+                                <h5 th:text="${error}" style="color:red;"></h5>
+                            </div>
+
+                            <div class="form-group no-margin">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    注册
+                                </button>
+                            </div>
+                            <div class="margin-top20 text-center">
+                                已有账号? <a href="login.html">登录</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer">
+                    Copyright &copy;  Company 2021 - 2025
+<!--                    <a href="http://www.purpleairs.com/" target="_blank" title="紫气软件官网">进入紫气软件官网</a>-->
+<!--                    <p><a href="https://beian.miit.gov.cn/">冀ICP备2021012557号-1</a></p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/my-login.js"></script>
+</body>
+</html>

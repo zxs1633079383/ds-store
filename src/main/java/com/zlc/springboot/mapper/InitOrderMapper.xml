@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlc.springboot.mapper.InitOrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.zlc.springboot.model.InitOrder">
+        <id column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo"/>
+        <result column="total_amount" jdbcType="DOUBLE" property="totalAmount"/>
+        <result column="subject" jdbcType="VARCHAR" property="subject"/>
+        <result column="body" jdbcType="VARCHAR" property="body"/>
+        <result column="userid" jdbcType="INTEGER" property="userid"/>
+        <result column="SoftId" jdbcType="INTEGER" property="softid"/>
+        <result column="orderState" jdbcType="INTEGER" property="orderstate"/>
+    </resultMap>
+    <!-- 1.根据softid查询对应的文件路径 -->
+
+    <select id="FilePathBySoftID" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT softFileurl
+    from
+    tb_soft
+    where SoftId=(
+    select SoftId from tb_initOrder where out_trade_no=#{out_trade_no}
+    )
+</select>
+
+    <!--  2.根据订单编号查询id -->
+    <select id="SelectIdByOrderID" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select softid
+    from tb_initOrder
+    where out_trade_no=#{out_trade_no}
+  </select>
+
+    <!-- 3.查询状态为0的订单数量  -->
+    <select id="ZeroByOrderState" resultType="java.lang.Integer">
+    select count(1)
+    from tb_initOrder
+    where orderState=0
+  </select>
+
+    <!-- 4.查询状态为0的订单数量  -->
+    <select id="OneByOrderState" resultType="java.lang.Integer">
+    select count(1)
+    from tb_initOrder
+    where orderState=1
+  </select>
+
+
+    <!-- 后台ResultMap -->
+    <resultMap id="ht_map" type="java.util.Map">
+        <result column="num" property="num"></result>
+        <result column="money" property="money"></result>
+    </resultMap>
+    <!-- 5.查询订单数量,以及下单金额 -->
+    <select id="selectNumAndMoney" resultMap="ht_map">
+    select count(*) as num,sum(total_amount) as money from tb_initOrder where orderState=1
+  </select>
+    <!--  6.查询总记录数,以及插件数量  -->
+    <select id="selectPageOfAll" resultType="java.lang.Integer">
+      select CEIL(count(*)/10) as num from tb_initorder
+  </select>
+
+    <!-- 7. 分页查询订单数据 -->
+  <select id="selectAllOfPage" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from tb_initorder limit #{start},#{end}
+  </select>
+
+    <!--  总记录数及插件数量Map -->
+    <!--  8. 查询总订单数量,以及所有下单金额,  -->
+    <resultMap id="allMap" type="java.util.Map">
+        <result column="aNum" property="aNum"></result>
+        <result column="aMoney" property="aMoney"></result>
+    </resultMap>
+    <select id="selectAllNumAndMoney" resultMap="ht_map">
+      select count(*) as aNum,round(sum(total_amount)) as aMoney from tb_initOrder
+    </select>
+
+    <!--  9.查询已下单金额和文件id.  -->
+    <resultMap id="file_map" type="java.util.Map">
+        <result column="softid" property="softid"></result>
+        <result column="money" property="money"></result>
+    </resultMap>
+    <select id="selectFileAllOfMoney" resultMap="file_map">
+        select softid,round(sum(total_amount)) as money from tb_initorder  where orderState=1 GROUP BY softid
+    </select>
+
+
+    <update id="updateStateById" parameterType="java.lang.String">
+    update tb_initOrder
+    set orderState=1
+    where out_trade_no = #{outTradeNo}
+  </update>
+
+    <sql id="Base_Column_List">
+    out_trade_no, total_amount, subject, body, userid, SoftId, orderState
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_initOrder
+        where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_initOrder
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.zlc.springboot.model.InitOrder">
+    insert into tb_initOrder (out_trade_no, total_amount, subject, 
+      body, userid, SoftId, 
+      orderState)
+    values (#{outTradeNo,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DOUBLE}, #{subject,jdbcType=VARCHAR}, 
+      #{body,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{softid,jdbcType=INTEGER}, 
+      #{orderstate,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zlc.springboot.model.InitOrder">
+        insert into tb_initOrder
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="outTradeNo != null">
+                out_trade_no,
+            </if>
+            <if test="totalAmount != null">
+                total_amount,
+            </if>
+            <if test="subject != null">
+                subject,
+            </if>
+            <if test="body != null">
+                body,
+            </if>
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="softid != null">
+                SoftId,
+            </if>
+            <if test="orderstate != null">
+                orderState,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="outTradeNo != null">
+                #{outTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmount != null">
+                #{totalAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="subject != null">
+                #{subject,jdbcType=VARCHAR},
+            </if>
+            <if test="body != null">
+                #{body,jdbcType=VARCHAR},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="softid != null">
+                #{softid,jdbcType=INTEGER},
+            </if>
+            <if test="orderstate != null">
+                #{orderstate,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zlc.springboot.model.InitOrder">
+        update tb_initOrder
+        <set>
+            <if test="totalAmount != null">
+                total_amount = #{totalAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="subject != null">
+                subject = #{subject,jdbcType=VARCHAR},
+            </if>
+            <if test="body != null">
+                body = #{body,jdbcType=VARCHAR},
+            </if>
+            <if test="userid != null">
+                userid = #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="softid != null">
+                SoftId = #{softid,jdbcType=INTEGER},
+            </if>
+            <if test="orderstate != null">
+                orderState = #{orderstate,jdbcType=INTEGER},
+            </if>
+        </set>
+        where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zlc.springboot.model.InitOrder">
+    update tb_initOrder
+    set total_amount = #{totalAmount,jdbcType=DOUBLE},
+      subject = #{subject,jdbcType=VARCHAR},
+      body = #{body,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER},
+      SoftId = #{softid,jdbcType=INTEGER},
+      orderState = #{orderstate,jdbcType=INTEGER}
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

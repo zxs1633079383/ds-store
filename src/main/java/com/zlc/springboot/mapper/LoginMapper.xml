@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlc.springboot.mapper.LoginMapper">
+    <resultMap id="BaseResultMap" type="com.zlc.springboot.model.Login">
+        <id column="userid" jdbcType="INTEGER" property="userid"/>
+        <result column="user" jdbcType="VARCHAR" property="user"/>
+        <result column="pwd" jdbcType="VARCHAR" property="pwd"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="userkey" jdbcType="VARCHAR" property="userkey"/>
+        <result column="qqname" jdbcType="VARCHAR" property="qqname"/>
+    </resultMap>
+    <!-- 1.判断账号和密码是否正确 -->
+    <select id="isUser" parameterType="java.lang.String" resultType="com.zlc.springboot.model.Login">
+        select * from tb_login where user=#{user} and pwd=#{pwd}
+  </select>
+    <select id="findUserid" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select userid from tb_login where user=#{user}
+    </select>
+    <!--  3.查询用户数量  -->
+    <select id="selectUserNum" resultType="java.lang.Integer">
+        select count(*) from tb_login
+    </select>
+    <!--  4.分页查询所有用户  -->
+    <select id="selectAll" parameterType="java.lang.Integer" resultType="com.zlc.springboot.model.Login">
+        select * from tb_login limit #{start},#{end}
+    </select>
+    <!--  5.查询分页插件数量  -->
+    <select id="selectNumOfAll" resultType="java.lang.Integer">
+        select CEIL(count(*)/10) from tb_login
+   </select>
+
+
+    <sql id="Base_Column_List">
+    userid, user, pwd, createTime, userkey, qqname
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_login
+        where userid = #{userid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_login
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zlc.springboot.model.Login">
+    insert into tb_login (userid, user, pwd,
+      createTime, userkey, qqname
+      )
+    values (#{userid}, #{user}, #{pwd},
+      #{createtime}, #{userkey}, #{qqname}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.zlc.springboot.model.Login">
+        insert into tb_login
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="user != null">
+                user,
+            </if>
+            <if test="pwd != null">
+                pwd,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+            <if test="userkey != null">
+                userkey,
+            </if>
+            <if test="qqname != null">
+                qqname,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="user != null">
+                #{user,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userkey != null">
+                #{userkey,jdbcType=VARCHAR},
+            </if>
+            <if test="qqname != null">
+                #{qqname,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zlc.springboot.model.Login">
+        update tb_login
+        <set>
+            <if test="user != null">
+                user = #{user,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                pwd = #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userkey != null">
+                userkey = #{userkey,jdbcType=VARCHAR},
+            </if>
+            <if test="qqname != null">
+                qqname = #{qqname,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where userid = #{userid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zlc.springboot.model.Login">
+    update tb_login
+    set user = #{user,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      userkey = #{userkey,jdbcType=VARCHAR},
+      qqname = #{qqname,jdbcType=VARCHAR}
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

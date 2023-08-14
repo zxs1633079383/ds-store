@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlc.springboot.mapper.SoftMapper">
+  <resultMap id="BaseResultMap" type="com.zlc.springboot.model.Soft">
+    <id column="SoftId" jdbcType="INTEGER" property="softid" />
+    <result column="softName" jdbcType="VARCHAR" property="softname" /> 
+    <result column="softLength" jdbcType="DOUBLE" property="softlength" />
+    <result column="softPrice" jdbcType="DOUBLE" property="softprice" />
+    <result column="softFather" jdbcType="VARCHAR" property="softfather" />
+    <result column="softCreatime" jdbcType="TIMESTAMP" property="softcreatime" />
+    <result column="softIconPath" jdbcType="VARCHAR" property="softiconpath" />
+    <result column="softImagepath" jdbcType="VARCHAR" property="softimagepath" />
+    <result column="softFileurl" jdbcType="VARCHAR" property="softfileurl" />
+    <result column="softstate" jdbcType="INTEGER" property="softstate" />
+    <result column="softtext" jdbcType="VARCHAR" property="softtext"/>
+  </resultMap>
+<!-- 1.查询所有数据 -->
+  <select id="selectSoftAll" resultType="com.zlc.springboot.model.Soft">
+    select * from tb_soft
+  </select>
+
+<!-- 2.查询所有精品软件数据 -->
+  <select id="selectSoftOfBoutique" resultType="com.zlc.springboot.model.Soft">
+    select * from tb_soft where softstate=3
+  </select>
+
+<!-- 3.按销量排行 -->
+  <select id="selectSoftOfManyCount" resultType="com.zlc.springboot.model.Soft">
+    select
+     <include refid="TwoTableOnSoft"></include>
+     from tb_soft s join tb_sell l where s.softid=l.softid ORDER BY l.sellnumcount DESC
+  </select>
+
+<!-- 4.按免费软件排行 -->
+  <select id="selectSoftOfFree" resultType="com.zlc.springboot.model.Soft">
+        select * from tb_soft where softstate=2
+  </select>
+<!-- 5. 根据id查询文件名字 -->
+  <select id="selectNameById" resultType="java.lang.String" parameterType="java.lang.Integer">
+    select softname from tb_soft where softid=#{softid}
+  </select>
+  <!-- 6. 分页查询所有文件 -->
+  <select id="selectpageAllSoft" resultType="com.zlc.springboot.model.Soft" parameterType="java.lang.Integer">
+    select * from tb_soft limit #{start},#{end}
+  </select>
+<!--  7. 查询分页插件数量 -->
+  <select id="selectCjNum" resultType="java.lang.Integer">
+    SELECT CEIL(count(*)/10)  FROM tb_soft
+  </select>
+
+  <sql id="Base_Column_List">
+    SoftId, softName, softLength, softPrice, softFather, softCreatime, softIconPath, 
+    softImagepath, softFileurl, softstate ,softtext
+  </sql>
+
+  <sql id="TwoTableOnSoft">
+    s.SoftId, s.softName, s.softLength, s.softPrice, s.softFather, s.softCreatime, s.softIconPath,
+    s.softImagepath, s.softFileurl, s.softstate,s.softtext
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_soft
+    where SoftId = #{softid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_soft
+    where SoftId = #{softid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlc.springboot.model.Soft">
+    insert into tb_soft (SoftId, softName, softLength, 
+      softPrice, softFather, softCreatime, 
+      softIconPath, softImagepath, softFileurl, 
+      softstate, softtext)
+    values (#{softid,jdbcType=INTEGER}, #{softname,jdbcType=VARCHAR}, #{softlength,jdbcType=DOUBLE}, 
+      #{softprice,jdbcType=DOUBLE}, #{softfather,jdbcType=VARCHAR}, #{softcreatime,jdbcType=TIMESTAMP}, 
+      #{softiconpath,jdbcType=VARCHAR}, #{softimagepath,jdbcType=VARCHAR}, #{softfileurl,jdbcType=VARCHAR}, 
+      #{softstate,jdbcType=INTEGER},#{softtext,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlc.springboot.model.Soft">
+    insert into tb_soft
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        SoftId,
+      <if test="softname != null">
+        softName,
+      </if>
+      <if test="softlength != null">
+        softLength,
+      </if>
+      <if test="softprice != null">
+        softPrice,
+      </if>
+      <if test="softfather != null">
+        softFather,
+      </if>
+      <if test="softcreatime != null">
+        softCreatime,
+      </if>
+      <if test="softiconpath != null">
+        softIconPath,
+      </if>
+      <if test="softimagepath != null">
+        softImagepath,
+      </if>
+      <if test="softfileurl != null">
+        softFileurl,
+      </if>
+      <if test="softstate != null">
+        softstate,
+      </if>
+      <if test="softtext != null">
+        softtext,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        null,
+      <if test="softname != null">
+        #{softname,jdbcType=VARCHAR},
+      </if>
+      <if test="softlength != null">
+        #{softlength,jdbcType=DOUBLE},
+      </if>
+      <if test="softprice != null">
+        #{softprice,jdbcType=DOUBLE},
+      </if>
+      <if test="softfather != null">
+        #{softfather,jdbcType=VARCHAR},
+      </if>
+      <if test="softcreatime != null">
+        #{softcreatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="softiconpath != null">
+        #{softiconpath,jdbcType=VARCHAR},
+      </if>
+      <if test="softimagepath != null">
+        #{softimagepath,jdbcType=VARCHAR},
+      </if>
+      <if test="softfileurl != null">
+        #{softfileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="softstate != null">
+        #{softstate,jdbcType=INTEGER},
+      </if>
+      <if test="softtext != null">
+        #{softtext}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlc.springboot.model.Soft">
+    update tb_soft
+    <set>
+      <if test="softname != null">
+        softName = #{softname,jdbcType=VARCHAR},
+      </if>
+      <if test="softlength != null">
+        softLength = #{softlength,jdbcType=DOUBLE},
+      </if>
+      <if test="softprice != null">
+        softPrice = #{softprice,jdbcType=DOUBLE},
+      </if>
+      <if test="softfather != null">
+        softFather = #{softfather,jdbcType=VARCHAR},
+      </if>
+      <if test="softcreatime != null">
+        softCreatime = #{softcreatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="softiconpath != null">
+        softIconPath = #{softiconpath,jdbcType=VARCHAR},
+      </if>
+      <if test="softimagepath != null">
+        softImagepath = #{softimagepath,jdbcType=VARCHAR},
+      </if>
+      <if test="softfileurl != null">
+        softFileurl = #{softfileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="softstate != null">
+        softstate = #{softstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where SoftId = #{softid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlc.springboot.model.Soft">
+    update tb_soft
+    set softName = #{softname,jdbcType=VARCHAR},
+      softLength = #{softlength,jdbcType=DOUBLE},
+      softPrice = #{softprice,jdbcType=DOUBLE},
+      softFather = #{softfather,jdbcType=VARCHAR},
+      softCreatime = #{softcreatime,jdbcType=TIMESTAMP},
+      softIconPath = #{softiconpath,jdbcType=VARCHAR},
+      softImagepath = #{softimagepath,jdbcType=VARCHAR},
+      softFileurl = #{softfileurl,jdbcType=VARCHAR},
+      softstate = #{softstate,jdbcType=INTEGER}
+      softtext = #{softtext,jdbcType=VARCHAR}
+    where SoftId = #{softid,jdbcType=INTEGER}
+  </update>
+</mapper>

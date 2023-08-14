@@ -1,0 +1,110 @@
+body {
+    /* 设置背景图片 */
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+}
+
+#login-div {
+    /* 宽高以及背景颜色 */
+    width: 345px;
+    height: 340px;
+    background-color: rgba(100, 152, 142, 0.1);
+
+    /* 绝对定位 */
+    position: absolute;
+    left: 500px;
+    top: 160px;
+
+    /* 圆角矩形 */
+    border-radius: 10px;
+}
+
+h4 {
+    display: inline-block;
+}
+
+#use {
+    position: absolute;
+    top: 100px;
+}
+
+#pw {
+    position: absolute;
+    top: 150px;
+}
+
+#btn-submit {
+    width: 120px;
+    height: 40px;
+    position: absolute;
+    top: 230px;
+    left: 80px;
+}
+
+#btn-toLogto {
+    position: absolute;
+    top: 230px;
+    left: 210px;
+}
+
+#user {
+    width: 150px;
+    height: 30px;
+    position: absolute;
+    top: 100px;
+    left: 120px;
+}
+
+#pwd {
+    width: 150px;
+    height: 30px;
+    position: absolute;
+    top: 150px;
+    left: 120px;
+}
+
+#hy {
+    color: yellow;
+    position: absolute;
+    top: 50px;
+    left: 80px;
+}
+
+#text-user {
+    width: 150px;
+    height: 30px;
+    position: absolute;
+    top: 100px;
+    left: 120px;
+}
+
+#text-pwd {
+    width: 150px;
+    height: 30px;
+    position: absolute;
+    top: 150px;
+    left: 120px;
+}
+
+#fh {
+    position: absolute;
+    top: 230px;
+    left: 150px;
+}
+
+#yhm {
+    position: absolute;
+    top: 100px;
+    left: 50px;
+}
+
+#mm {
+    position: absolute;
+    top: 150px;
+    left: 50px;
+}
+
+#hy {
+
+}

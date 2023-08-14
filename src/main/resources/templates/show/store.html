@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="Keywords" content="行业软件,商业软件">
+		<meta name="description" content="打造一个顶尖的软件平台,拥有各种各式的优质软件,极简网络验证,安装包制作工具,免费的云服务器,以及各种各样优质精品" />
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/nar-bar.css" />
+		<link rel="stylesheet" type="text/css" href="../css/item.css" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+		<title>GT软件平台</title>
+
+		<style type="text/css">
+			.lb {
+				width: 1400px;
+				background-color: #007BFF;
+				margin: 0 auto;
+				margin-top: 20px;
+				border-radius: 5px;
+				box-shadow: 0 0 5px #074A99;
+			}
+
+			.kp {
+				width: 1400px;
+				background-color: white;
+				margin: 0 auto;
+				margin-top: 20px;
+			}
+
+
+			.fooler {
+				width: 100%;
+				height: 220px;
+				background-color: #464646;
+				margin-top: 20px;
+			}
+
+			.carousel-inner img {
+				width: 100%;
+				height: 490px;
+				border-radius: 5px;
+			}
+
+			.fooler a {
+				color: white;
+			}
+
+			.list-group {
+				display: inline-block;
+			}
+		</style>
+
+	</head>
+	<body style="background-color: #ECEBEE;">
+
+		 <div th:insert="common/Top::Newtop(user=${session.user})"></div>
+		<!-- 头部界面 -->
+
+
+		<div class="lb">
+			<div id="demo" class="carousel slide" data-ride="carousel">
+
+				<!-- 指示符 -->
+				<ul class="carousel-indicators">
+					<li data-target="#demo" data-slide-to="0" class="active"></li>
+					<li data-target="#demo" data-slide-to="1"></li>
+					<li data-target="#demo" data-slide-to="2"></li>
+				</ul>
+
+				<!-- 轮播图片 -->
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="../img/lb2.jpg">
+					</div>
+					<div class="carousel-item">
+						<img src="../img/lb1.jpg">
+					</div>
+					<div class="carousel-item">
+						<img src="../img/lb3.jpg">
+					</div>
+				</div>
+
+				<!-- 左右切换按钮 -->
+				<a class="carousel-control-prev" href="#demo" data-slide="prev">
+					<span class="carousel-control-prev-icon"></span>
+				</a>
+				<a class="carousel-control-next" href="#demo" data-slide="next">
+					<span class="carousel-control-next-icon"></span>
+				</a>
+
+			</div>
+		</div>
+
+		<!-- 轮播图下方区域 -->
+		<div class="kp">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#admin" role="tab"
+						aria-controls="home" aria-selected="true">
+						<h6>全部软件</h6>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#edit" role="tab"
+						aria-controls="profile" aria-selected="false">
+						<h6>精品软件</h6>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="contact-tab" data-toggle="tab" href="#audit" role="tab"
+						aria-controls="contact" aria-selected="false">
+						<h6>热销软件</h6>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="free-tab" data-toggle="tab" href="#contact" role="tab"
+						aria-controls="contact" aria-selected="false">
+						<h6>免费软件</h6>
+					</a>
+				</li>
+			</ul>
+			<!--展示数据页面-->
+			<div class="tab-content border border-top-0" id="myTabContent">
+				<div class="tab-pane fade show active" id="admin" role="tabpanel" aria-labelledby="home-tab">
+					<ul class="list-group list-group-flush">
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="profile-tab">
+					<ul class="list-group list-group-flush">
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+				<div class="tab-pane fade" id="audit" role="tabpanel" aria-labelledby="contact-tab">
+					<ul class="list-group list-group-flush">
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+					<ul class="list-group list-group-flush">
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+						<li class="item">
+							<div class="item-left">
+								<a href="softmore/">
+									<img src="../img/PEiD_00001.ico" alt=".">
+								</a>
+							</div>
+							<div class="item-right">
+								<a href="#">
+									<p class="item-into">管理系统</p>
+									<p class="item-other">价格: 400Y</p>
+									<p class="item-other">springboot+mybatisplus</p>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		 <div th:insert="common/Top::Bellow"></div>
+
+	</body>
+
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	 <script src="../js/store.js"></script>
+</html>

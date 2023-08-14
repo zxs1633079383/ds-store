@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户编辑</title>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+        <!-- Favicon icon -->
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon.png">
+        <!-- Pignose Calender -->
+        <link href="plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
+        <!-- Chartist -->
+        <link rel="stylesheet" href="plugins/chartist/css/chartist.min.css">
+        <link rel="stylesheet" href="plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+        <!-- Custom Stylesheet -->
+        <link href="/plugins/css/style.css" rel="stylesheet">
+
+    </head>
+</head>
+<body>
+<div id="preloader">
+    <div class="loader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+        </svg>
+    </div>
+</div>
+
+<div id="main-wrapper">
+
+    <!--**********************************
+        Nav header start
+    ***********************************-->
+    <!-- 左上角公共部分  -->
+    <div th:insert="common/HtCommon::Left-Top(user=${user})"></div>
+    <!-- 右上角公共部分 -->
+    <div th:insert="common/HtCommon::Top(user=${user})"></div>
+    <!-- 左部公共部分  -->
+    <div th:insert="common/HtCommon::Left(user=${user})"></div>
+
+    <!--  内部内容在这里编写   -->
+    <div class="content-body">
+        <!--  内部内容在这里编写   -->
+        <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" rel="stylesheet">
+        <div id="box" style="width: 500px;margin: 0 auto;margin-top: 50px;">
+            <form action="/UserUpdate-true" method="post">
+                <div class="form-group">
+                    <!-- 放表单组，放置一组匹配的表单 -->
+                    <label for="userId">用户ID：</label>
+                    <input type="text" id="userId" disabled="disabled" class="form-control" required="required" th:value="${login.getUserid()}">
+                    <input type="hidden" name="userid" th:value="${login.getUserid()}">
+                </div>
+                <div class="form-group">
+                    <!-- 放表单组，放置一组匹配的表单 -->
+                    <label for="user">用户名：</label>
+                    <input type="text" id="user" name="user" class="form-control" required="required" placeholder="请输入用户名" th:value="${login.getUser()}">
+                </div>
+                <div class="form-group">
+                    <label for="password">密码：</label>
+                    <input type="password" class="form-control" name="pwd" id="password" required="required" placeholder="请输入密码" th:value="${login.getPwd()}">
+                </div>
+                <div class="form-group">
+                    <label for="passwordAgain">确认密码：</label>
+                    <input type="password" name="userkey" class="form-control" id="passwordAgain" required="required" placeholder="请再次输入密码">
+                    <small class="form-text text-muted"><span style="color: red;" th:text="${error}"></span></small>
+                </div>
+                <div class="form-group">
+                    <label for="qq">QQ账号：</label>
+                    <input type="text" name="qqname" class="form-control" id="qq" required="required" placeholder="请输入QQ账号" th:value="${login.getQqname()}" onkeyup="this.value=this.value.replace(/[^0-9]+/,'');">
+                    <small class="form-text text-muted"><span style="color: red;"></span></small>
+                </div>
+
+                <div class="button">
+                    &#12288;&#12288;&#12288;&#12288;&#12288;<button  th:if="${login.getUserid()}==null" type="button" class="btn mb-1 btn-outline-success">更新信息</button>&#12288;&#12288;&#12288;&#12288;
+                    &#12288;&#12288;&#12288;&#12288;&#12288;<button th:if="!(${login.getUserid()}==null)" type="submit" class="btn mb-1 btn-outline-success">更新信息</button>&#12288;&#12288;&#12288;&#12288;
+                    <button type="button" id="btn_clear" class="btn mb-1 btn-outline-primary">重置信息</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="plugins/common/common.min.js"></script>
+<script src="js/custom.min.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/gleek.js"></script>
+<script src="js/styleSwitcher.js"></script>
+
+<!-- Chartjs -->
+<script src="./plugins/chart.js/Chart.bundle.min.js"></script>
+<!-- Circle progress -->
+<script src="./plugins/circle-progress/circle-progress.min.js"></script>
+<!-- Datamap -->
+<script src="./plugins/d3v3/index.js"></script>
+<script src="./plugins/topojson/topojson.min.js"></script>
+<script src="./plugins/datamaps/datamaps.world.min.js"></script>
+<!-- Morrisjs -->
+<script src="./plugins/raphael/raphael.min.js"></script>
+<script src="./plugins/morris/morris.min.js"></script>
+<!-- Pignose Calender -->
+<script src="./plugins/moment/moment.min.js"></script>
+<script src="./plugins/pg-calendar/js/pignose.calendar.min.js"></script>
+<!-- ChartistJS -->
+<script src="./plugins/chartist/js/chartist.min.js"></script>
+<script src="./plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+<script src="./js/dashboard/dashboard-1.js"></script>
+<script>
+    $("#btn_clear").on('click',function () {
+        //清空所有文本框内容.
+        $("#user").val("");
+        $("#password").val("");
+        $("#passwordAgain").val("");
+        $("#qq").val("");
+    })
+</script>
+</body>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+<div th:fragment="h1">
+    <h1 style="color: red">你好我是插入的内容</h1>
+</div>
+
+<!-- 头部界面 -->
+<div class="header" th:fragment="Newtop(user)">
+    <!--导航栏-->
+    <div class="center">
+        <!--导航栏居中内容-->
+        <div class="logo">
+            <!--导航栏左边的logo-->
+            <img th:src="@{~/img/gtlogo.jpg}">
+        </div>
+        <div class="bar">
+            <!--导航条-->
+            <ul>
+                <li><a href="/A-to-store">软件商店</a></li>
+                <li><a href="/A-to-dosoft">定制软件</a></li>
+                <li><a href="/A-to-fileUpload">上传软件</a></li>
+                <li><a href="/A-to-AllSoft?page=1">软件总览</a></li>
+                <li><a href="/A-to-server">服务器搭建</a></li>
+            </ul>
+        </div>
+        <div class="user">
+            <!-- 1.没有登录则显示登录和请求 -->
+            <a th:if="${user} == null" href="/A-to-Logto">
+                <button type="button" class="btn btn-link">免费注册</button>
+            </a>
+            <a th:if="${user} == null" href="/A-to-Login">
+                <button type="button" class="btn btn-primary" style="width: 102px; height: 38px; font-size: 14px;">登录
+                </button>
+            </a>
+
+            <!-- 已登录则显示个人中心和注销请求. -->
+            <!-- 个人中心 -->
+            <!--            <a th:if="!(${user} == null)" th:text="${user}" th:value="${user}" class="btn btn-primary"  style="width: 102px; height: 38px; font-size: 14px;"></a>-->
+            <style>
+                #tou_xiang {
+                    display: inline-block;
+                }
+
+                #tou_xiang i {
+                    width: 10px;
+                    margin: 0;
+                    line-height: 25px;
+                    color: #5a6268;
+                    font-weight: bold;
+                }
+
+                .dropdown {
+                    position: relative;;
+                    display: inline-block;
+                    float: left;
+                }
+
+                .dropdown-content {
+                    z-index: 999999;
+                    display: none;
+                    /*display: block;*/
+                    position: absolute;
+                    background-color: #f9f9f9;
+                    min-width: 160px;
+                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                    margin-left: -10px;
+                }
+
+                .dropdown-content a {
+                    color: #000000;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                }
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1
+                }
+
+                .dropdown:hover .dropdown-content {
+                    display: block;
+                }
+
+                .dropdown:hover .dropbtn {
+                    background-color: #3e8e41;
+                }
+            </style>
+            <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+            <script src="//cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(function () {
+                    $("#tou_xiang ").hover(function () {
+                        $(".dropdown-content").show(50);
+                    }, function () {
+                        $(".dropdown-content").hide(50);
+                    });
+                })
+
+            </script>
+            <div th:if="!(${user} == null)" id="tou_xiang">
+                <img id="img" src="https://q4.qlogo.cn/headimg_dl?dst_uin=1878381650&spec=100"
+                     style="width: 45px;height:45px;margin-right: 20px;border-radius: 50%">
+                <i class="fa fa-angle-down" fa-2x aria-hidden="true" style="width: 10px"></i>
+                <div class="dropdown-content">
+                    <span><a href="/A-to-orderList?page=1"> <i class="fa fa-comments"
+                                                               style="font-size: 25px;line-height: 45px;"></i>查看订单</a></span>
+                    <!--                    <span><a href="">完善个人信息</a></span>-->
+                    <span><a href="/A-to-UserShow?page=1">查看所有用户</a></span>
+                    <span><a href="/sign-out/delete-Session">注销退出</a></span>
+                </div>
+            </div>
+
+            <!-- 注销请求 -->
+            <a th:if="!(${user} == null)" href="/sign-out/delete-Session">
+                <button type="button" class="btn btn-link">注销</button>
+            </a>
+
+        </div>
+    </div>
+</div>
+
+<!-- 底部界面 -->
+<div class="fooler" th:fragment="Bellow">
+    <footer class="lowin-footer">
+        <h5 style="text-align: center">  Copyright &copy;  Company 2021 - 2025</h5>
+        <!--        <a href="http://www.purpleairs.com/" target="_blank" title="紫气软件官网">进入紫气软件官网</a>-->
+        <!--        <p><a href="https://beian.miit.gov.cn/">冀ICP备2021012557号-1</a></p>-->
+    </footer>
+</div>
+

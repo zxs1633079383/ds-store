@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div id="text" th:fragment="h1">
+    <h1 style="color: red">你好我是插入的内容</h1>
+</div>
+
+
+<div class="header" th:fragment="top">
+    <div class="warp">
+        <div class="logo">
+            <img src="img/logo.jpg">
+        </div>
+        <div class="nav-bar">
+            <ul>
+                <li><a href="store.html">软件商店</a></li>
+                <li><a href="share.html">共享软件</a></li>
+                <li><a href="">社区</a></li>
+                <li><a href="">发布应用</a></li>
+                <li><a href="" class="btn1">服务器资源</a></li>
+                <!--                <li th:if="!(${user} eq '')" th:text="${user}" style="margin-left: 150px"></li>-->
+            </ul>
+        </div>
+        <div class="user">
+            <!--单击按钮弹出bootstarp模态框-->
+            <!--         <input type="button" name="登录" id="btn-submit" value="登录/注册" data-toggle="modal" data-target="#myModal"/>-->
+            <!--单击跳转登录界面-->
+            <form method="get" action="/A-to-Login">
+                <input type="button" name="登录" id="btn-toLogin" value="登录/注册"/>
+                <input type="button" name="user" id="btn-user" value="" style="display: none"/>
+            </form>
+            <!--            <a th:class="${active=='main.html'?'nav-link active':'nav-link'}" th:href="@{/library/library-main/} + ${user}">-->
+        </div>
+        <!--        <input th:if="!(${user} eq '')" type="button" name="登录" id="" th:value="${user}" data-toggle="modal" data-target="#myModal"/>-->
+
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- 模态框头部 -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">用户登录</h4>
+
+
+                    </div>
+
+                    <!-- 模态框主体 -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="userName">用户名</label>
+                            <input type="text" class="form-control" id="userName" placeholder="请输入用户名" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">密码:</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="请输入密码"
+                                   name="password">
+                        </div>
+
+                    </div>
+
+                    <!-- 模态框底部 -->
+                    <div class="modal-footer">
+                        <span id="zt"></span>
+                        <h5 id="error" style="color: #6bf8ff;position: absolute;top:180px;left: 130px"></h5>
+                        <input type="button" class="btn btn-primary" id="btn-user-submit" value="登录"/>
+                        <a href="/toLogTo">注册</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="foot" th:fragment="foot">
+
+</div>

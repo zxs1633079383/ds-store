@@ -1,0 +1,117 @@
+.container {
+    width: 1490px;
+    margin-top: 30px;
+    /*border: 1px solid black;*/
+    padding: 0;
+}
+
+.slider-sidebar {
+    display: flex;
+    justify-self: center;
+}
+
+.sidebar {
+    width: 50%;
+}
+
+.sidebar .content {
+    display: inline-block;
+    width: 100%;
+}
+
+h5{
+    color: red;margin-left: 30px;font-weight: bold;margin-bottom: 10px;
+}
+.sidebar .content .content-a {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    list-style: none;
+}
+/*.content-a::before {*/
+/*.content-a::before {*/
+/*    content: "软件名称:极简网络验证1";*/
+/*}*/
+/*.content-b::before {*/
+/*    content :"开发商:紫气软件"*/
+/*}*/
+/*.content-c::before {*/
+/*    content: "运营商:紫气软件";*/
+/*}*/
+/*.content-d::before {*/
+/*    content :"上架日期:2021-04-23";*/
+/*}*/
+.content-a::before,
+.content-b::before,
+.content-c::before,
+.content-d::before {
+    width: 324px;
+    height: 30px;
+    color: red;
+    padding-left: 20px;
+    font-size: 14px;
+    font-family: arial;
+    font-weight: bold;
+    line-height: 30px;
+}
+.content-group {
+    margin-top: 10px;
+}
+.content-group a {
+    height: 28px;
+    font-size: 14px;
+    color: #888;
+    font-family: arial;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.content-bg {
+    width: 100%;
+    height: 2px;
+    background-image: url(../img/bianxianx.jpg);
+    background-size: 100% 100%;
+}
+
+.content-box {
+    width: 100%;
+    height: 100%;
+}
+
+.content-box p {
+    height: 160px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-indent: 2em;
+    line-height: 22px;
+    font-size: 12px;
+}
+
+/*文字详情*/
+.list-details {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+    border: 1px dashed #f40;
+    box-sizing: border-box;
+}
+
+.list-details a {
+    width: 20%;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    color: #000;
+    font-weight: bold;
+}
+
+.detail-img {
+    margin-top: 30px;
+}
+
+.detail-img img{
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,127 @@
+# DataSource Config
+#数据库配置
+spring:
+
+  #Redis配置
+  redis:
+    database: 0 #Redis数据库索引（默认为0）
+    host: 127.0.0.1 #Redis服务器地址
+    port: 6379 #Redis服务器连接端口
+    password:  #Redis服务器连接密码（默认为空）
+    jedis:
+      pool:
+        max-active: 8 #连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1s #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 8  #连接池中的最大空闲连接
+        min-idle: 0 #连接池中的最小空闲连接
+    lettuce:
+      shutdown-timeout: 100ms #关闭超时时间，默认值100ms
+
+  #修改MultipartFile默认大小
+
+  servlet:
+    multipart:
+      #       设置单个文件大小
+      max-file-size: 50MB
+      #       设置单次请求文件的总大小
+      max-request-size: 100MB
+
+  #邮箱配置
+  mail:
+    #16330
+    #    username: 1633079383@qq.com
+    #    password: lablmdsioasgfdhi
+    #330 psw mjcwhtgzxcelchhi
+    username: 1633079383@qq.com
+    password: ecwlotnyumexcaeb
+    host: smtp.qq.com
+    properties.mail.smtp.ssl.enable: true
+  #数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://120.46.153.69:3306/purpleairs.com?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost/gtstore?serverTimezone=Asia/Shanghai
+#    username: purpleairs.com
+    username: root
+#    password: A2RNfacNKBzH8dXP
+
+    #配置mp 的日志输出
+    password: '082800'
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+    #druid连接池配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+
+    #配置监控统计拦截的filters，stat：监控统计、log4j：日志记录、wall：防御sql注入
+    #如果允许报错，java.lang.ClassNotFoundException: org.apache.Log4j.Properity
+    #则导入log4j 依赖就行
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionoProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+    #thymeleaf模板配置
+  thymeleaf:
+    #只需要关闭缓存就好,其他的都有默认配置
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    mode: HTML
+    check-template-location: true
+      #    spring.thymeleaf.prefix=classpath:/templates/
+      #spring.thymeleaf.suffix=.html
+      #spring.thymeleaf.cache=false
+    #spring.thymeleaf.servlet.content-type=text/html
+    #spring.thymeleaf.enabled=true
+    #spring.thymeleaf.encoding=UTF-8
+    #spring.thymeleaf.mode=HTML
+    #spring.thymeleaf.check-template-location=true
+
+
+
+
+server:
+  port: 8080
+
+initCaches:
+  key1: 60s
+  key2: 60s
+
+#image 中虚拟路径映射的本地路径
+mogu:
+  picture:
+    upload: D:\mogu    #定义文件上传的路径,真实地址
+    mapping: /store/image
+
+
+# **************************************************不用管
+#上线环境 mogu.picture.upload
+#mogu:
+#  picture:
+#    upload: /www/wwwroot    #定义文件上传的路径,真实地址
+#    mapping: /store/image
+#
+alipay:
+  app_id: 2021002189692850
+  merchant_private_key: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCR5UE4rVH5bQv2GwHtwBHUeQ6HvSxXmHLHB6ugHTlHV89B9O2li9SnN6U75AtED6TtAIjgIuvHDBpVNH1iq0DWAgtLUG80vnKRcP1Ep7qm2W2qTQ71AvWJYgaDoUYp7qmb9wf43HBND8d7XueP724fjphXmYw2Ux5+90f5YfN3ZwRvpV0Zc3N+Rp0k5iFiX/nJvPCK7y/8Qf1lXTsw2eyBZ2o8ihBf/F7QSGPMOyiAkAjVBlv32co9D8PI2NMVCvANNEvB7DyPBGItpIeTZ+22FeWljCNx2RbDsmd7yfSzk/HRXNoy0vJrAjbKcDnmY29JYlcici0i0ixrBxRjsIWjAgMBAAECggEAHQiUbCUBtTNgN/+z6I5afgABRj39PwlVfgomu1xVc78jvapySImFLinCtiJxo3/BgHCkzIXmidv8uYwSj7oo0u3hNYGyP7rOrebgX/NJD78hNczT9yo5lrdtOHC1t86I7kLA0WN87bkAJ6sBRgGN1rXX10b1QjJUVUv8hMJbYx1MVUfZn9wxA5ogWGz0doARTzwuB5a0KPaaPAk1Ty/JgYSYiaCd3+GubmETET2NkobSsLVpr4S4XhRuQJvTNY0HWsD4kQ9mER2csGwaGAd/+fyjQn1iHsYoYrbrTWK6knjcCffJ1Dw3r4HDlRYipy37tGj8WoDIcl+Ow3+hoVW00QKBgQDxBBmTt3wKUEmiu9Mg0pTGOOSrSJzzbyO3aHizXxPokTuTfu57RyqzIdWMkZyPEK3iskqamy7nkwo2p8blxzbcC3NPejGYUa25e1ZKs9oTidBTgQMccBXIrhjZK18OLQOk/X6pQKsaAwYvxnKAAxjhO2kewf48KdJd9/fo4vebrwKBgQCa90LJ5hKPYasWY/H4Da7cbV2kxx2s39HGlXWZ1LxOHBlE0KoUC/2OAFmb3XLZqUVAQFTuc23Xf83MeIjrvvb15oCnwfBxHanttgUDC0GI9WqlHxDY6kgDR/swj4EU+7hVQHVWb8eWORUNb+qSzPDpem3hHeN+RylRoNN516buTQKBgHEC5SNYo/cKEp0VyTfYxh30S3TtRXr4IB0+BWrGKEWi4/aTTCvOAP2h3cpd9LU4svBbfZPlNCct0VozbZYMxXKEg/s+ZsbvdbBFXv8EOjtzIZYmJllNTUmeKNSb+6RgAxd4Lc4bHp/Bz0LToJjZ2u6xtubPO/DmA1hAj6RJ2KTNAoGAbY8uuwtcR96nVNcodVVHMTRpJlxYEKbU6u80C6Qp1ZdsDgjwlee8Ra7dq6Ku1lAkU76nzUXyfI8w8sStGO8ULtneT7x/v5lXUGaFuJc2qBvKYB9Mi+9nJlq3rqdmfW1R74P48TlqBD0rMyrSzyLxmEAkeynkcpzhC4MGwHfE32kCgYEAs8g0k7qIAOiciFIiMcW8IXg5Cc8ydBahqOtxWPFKxP2BWQx5PxyfLywaEp8f81bxJoHSmHb9tKGbQ7XZ4NrYi6EYpzpAgMi30ory6EWLA4q7pvOTHb1H3QoE1uYOmRCg25l1ixlm6/VH0Sfcz6fCb+HztLrZxNyyXxZRQQLGlSI=
+  alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1klDxca+jItg/tdjzZEwxDicj9vmhH0jz3wwcYLO9vYjagQF6cTyAyUdDHzrszELyv5bkrBsO3RRRyV0iUCXUq4xt7PdoVGjeIQjcgz4Z1rY/G9uUu4yQWIQGPX6dNlxT6QxZ1jLyVV63AGuIm4iBQ+uWYYckEC1b5AdWudR1rNRkbzLDuhKeOrChF/bNlVaSfjc3m5hlt0CFaEF3Yt0TG0lYgNq4DmOuuX8mIIWmtrAqGNaUvNNr0sOcHLHzYPi1Vv7D5QF3RxqyWLAjNVpkGne0slORcn6p+RFZCdf05rsV0G1orSGiN9MxOlg6HKbVrsXt8VByyvkbnHdPdqrrQIDAQAB
+  return_url: http://purpleairs.com/alipay/return_url
+  gatewayUrl: https://openapi.alipay.com/gateway.do
+#
+

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlc.springboot.mapper.PlaceOrderMapper">
+  <resultMap id="BaseResultMap" type="com.zlc.springboot.model.PlaceOrder">
+    <id column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="seller_id" jdbcType="VARCHAR" property="sellerId" />
+    <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    out_trade_no, app_id, trade_no, seller_id, timestamp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_placeOrder
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_placeOrder
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlc.springboot.model.PlaceOrder">
+    insert into tb_placeOrder (out_trade_no, app_id, trade_no, 
+      seller_id, timestamp)
+    values (#{outTradeNo,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, 
+      #{sellerId,jdbcType=VARCHAR}, #{timestamp,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlc.springboot.model.PlaceOrder">
+    insert into tb_placeOrder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="outTradeNo != null">
+        out_trade_no,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="tradeNo != null">
+        trade_no,
+      </if>
+      <if test="sellerId != null">
+        seller_id,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="outTradeNo != null">
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerId != null">
+        #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlc.springboot.model.PlaceOrder">
+    update tb_placeOrder
+    <set>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null">
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerId != null">
+        seller_id = #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlc.springboot.model.PlaceOrder">
+    update tb_placeOrder
+    set app_id = #{appId,jdbcType=VARCHAR},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
+      seller_id = #{sellerId,jdbcType=VARCHAR},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP}
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

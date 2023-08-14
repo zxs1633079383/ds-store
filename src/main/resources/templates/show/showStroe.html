@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>软件介绍页面</title>
+    <link rel="stylesheet" href="../css/silder.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/nar-bar.css"/>
+</head>
+<style type="text/css">
+    .list-details a {
+        width: 32.48%;
+        /* padding: 26px 34px 31px 40px; */
+        background: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(243, 243, 243, 1);
+        box-sizing: border-box;
+        margin-bottom: 16px;
+        text-align: center;
+        line-height: 60px;
+        margin-left: 8px;
+        margin-top: 15px;
+        color: #888888;
+    }
+
+    .list-details a:hover {
+        text-decoration: none;
+        font-weight: 700;
+        color: black;
+    }
+
+    .background {
+        /* color: #fff; */
+        font-family: PingFangSC-Regular;
+        max-height: 140px;
+        background: url(../img/background_consult.png) no-repeat center center;
+        background-size: auto 100%;
+        height: 300px;
+        margin-top: 20px;
+    }
+</style>
+<body>
+<div th:insert="common/Top::Newtop(user=${session.user})"></div>
+<div class="container">
+    <div class="slider-sidebar">
+        <div id="slider">
+            <!--图片内部展示遍历-->
+            <ul class="slides clearfix">
+                <li th:each="imgList:${list}">
+                    <img class="responsive" style="width: 570px"
+                         th:src="@{('/store/image/' +${#strings.substring(imgList,0,imgList.length())})}"
+                    >
+                </li>
+            </ul>
+            <ul class="controls">
+                <li><img src="../img//prev.png" alt="previous"></li>
+                <li><img src="../img//next.png" alt="next"></li>
+            </ul>
+            <ul class="pagination">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="sidebar">
+            <div class="content">
+                <div class="content-group">
+                    <!--隐藏域控件的id,存储soft文件的ID名-->
+                    <input type="hidden" id="hid-softName" th:value="${soft.getSoftid()}"/>
+                    <!--隐藏域控件的id,存储soft文件的price-->
+                    <input type="hidden" id="hid-softprice" th:value="${soft.getSoftprice()}"/>
+                    <div class="content-a">
+                        <h5 style="    color: red;margin-left: 30px;font-weight: bold;margin-bottom: 10px;"
+                            th:text="'软件名称:' + ${soft.getSoftname()}"></h5>
+                        <!--                            <a href="#">更多</a>-->
+                    </div>
+                    <div class="content-bg"></div>
+                </div>
+                <div class="content-group">
+                    <div class="content-b">
+                        <h5 style="    color: red;margin-left: 30px;font-weight: bold;margin-bottom: 10px;"
+                            th:text="'开发商:' + ${soft.getSoftfather()}"></h5>
+                    </div>
+                    <div class="content-bg"></div>
+                </div>
+                <div class="content-group">
+                    <div class="content-c">
+                        <h5 style="    color: red;margin-left: 30px;font-weight: bold;margin-bottom: 10px;"
+                            th:text="'运营商:紫气软件'"></h5>
+                    </div>
+                    <div class="content-bg"></div>
+                </div>
+                <div class="content-group">
+                    <div class="content-d">
+                        <h5 style="    color: red;margin-left: 30px;font-weight: bold;margin-bottom: 10px;"
+                            th:text="'上传日期' + ${#dates.format(soft.getSoftcreatime(),'yyyy-MM-dd')}"></h5>
+                    </div>
+                    <div class="content-bg"></div>
+                </div>
+                <div class="content-box">
+                    <!--获取文件描述信息-->
+                    <p th:text="${soft.getSofttext()}">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-details">
+        <a th:if="${session.user}==null"
+           th:href="@{/toPay/} +${soft.getSoftname()} +'/' +${soft.getSoftprice()}+ '/' + ${soft.getSoftid()}"
+           id="a-buy"
+           onclick="alert('您正在购买本站软件' + '\n' + '拥有本站账号,即可免费使用所有产品.');">支付宝购买</a>
+        <a th:if="${session.user}!=null" href="" id="vip-buy"
+           onclick="alert('您已是本站Vip,可免费使用所有软件.' + '\n' + '点击下载按钮即可立即下载')">支付宝购买</a>
+        <a th:if="${session.user}==null" href="" id="a-down" onclick="alert('请先购买该软件')">下载软件</a>
+        <a th:if="${session.user}!=null"
+           th:href="@{/toDown/} +${#strings.substring(soft.getSoftfileurl(),6,soft.getSoftfileurl().length())}"
+           id="vip-down">下载软件</a>
+
+        <!--   ******************     -->
+        <a href="">立即购买</a>
+        <a href="">下载软件</a>
+        <a href="">分享软件</a>
+        <a href="">0004</a>
+        <a href="">0005</a>
+        <a href="">0006</a>
+        <a href="">0007</a>
+        <a href="">0008</a>
+        <a href="">0009</a>
+        <a href="">0010</a>
+    </div>
+    <!-- <div class="detail-img">
+        <img src="./images//1.jpg" alt="">
+    </div> -->
+</div>
+<div th:insert="common/Top::Bellow"></div>
+
+
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="../js/easySlider.min.js"></script>
+<script src="../js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlc.springboot.mapper.SellMapper">
+  <resultMap id="BaseResultMap" type="com.zlc.springboot.model.Sell">
+    <id column="SellId" jdbcType="INTEGER" property="sellid" />
+    <result column="SellNumCount" jdbcType="INTEGER" property="sellnumcount" />
+    <result column="SellSumMoney" jdbcType="DOUBLE" property="sellsummoney" />
+    <result column="SoftId" jdbcType="INTEGER" property="softid" />
+  </resultMap>
+<!-- 1.通过softid查询该软件是否被下载过 -->
+  <select id="selectCountBySoftid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(1) from tb_sell where softid=#{softid}
+  </select>
+
+
+
+<!-- 2.通过softid更新下单总览表中的数据 -->
+  <update id="updateDownBySoftid" parameterType="java.lang.Integer">
+    update tb_sell
+    set SellNumCount=SellNumCount+1,
+    SellSumMoney=SellSumMoney+(SELECT softprice from tb_soft where softid=#{softid})
+    where softid=#{softid}
+  </update>
+
+<!-- 3。获取当前交易总额  -->
+  <select id="moneyAll" resultType="java.lang.Integer">
+    select sum(SellSumMoney) from tb_sell
+  </select>
+  <sql id="Base_Column_List">
+    SellId, SellNumCount, SellSumMoney, SoftId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sell
+    where SellId = #{sellid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_sell
+    where SellId = #{sellid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlc.springboot.model.Sell">
+    insert into tb_sell (SellId, SellNumCount, SellSumMoney, 
+      SoftId)
+    values (#{sellid,jdbcType=INTEGER},
+     #{sellnumcount,jdbcType=INTEGER}, #{sellsummoney,jdbcType=DOUBLE},
+      #{softid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlc.springboot.model.Sell">
+    insert into tb_sell
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sellid != null">
+        SellId,
+      </if>
+      <if test="sellnumcount != null">
+        SellNumCount,
+      </if>
+      <if test="sellsummoney != null">
+        SellSumMoney,
+      </if>
+      <if test="softid != null">
+        SoftId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sellid != null">
+        #{sellid,jdbcType=INTEGER},
+      </if>
+      <if test="sellnumcount != null">
+        #{sellnumcount,jdbcType=INTEGER},
+      </if>
+      <if test="sellsummoney != null">
+        #{sellsummoney,jdbcType=DOUBLE},
+      </if>
+      <if test="softid != null">
+        #{softid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlc.springboot.model.Sell">
+    update tb_sell
+    <set>
+      <if test="sellnumcount != null">
+        SellNumCount = #{sellnumcount,jdbcType=INTEGER},
+      </if>
+      <if test="sellsummoney != null">
+        SellSumMoney = #{sellsummoney,jdbcType=DOUBLE},
+      </if>
+      <if test="softid != null">
+        SoftId = #{softid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where SellId = #{sellid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlc.springboot.model.Sell">
+    update tb_sell
+    set SellNumCount = #{sellnumcount,jdbcType=INTEGER},
+      SellSumMoney = #{sellsummoney,jdbcType=DOUBLE},
+      SoftId = #{softid,jdbcType=INTEGER}
+    where SellId = #{sellid,jdbcType=INTEGER}
+  </update>
+
+</mapper>

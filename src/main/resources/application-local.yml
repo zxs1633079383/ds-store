@@ -1,0 +1,102 @@
+# DataSource Config
+#数据库配置
+spring:
+
+  #修改MultipartFile默认大小
+  servlet:
+    multipart:
+      #       设置单个文件大小
+      max-file-size: 50MB
+      #       设置单次请求文件的总大小
+      max-request-size: 100MB
+
+  #邮箱配置
+  mail:
+    #16330
+    #    username: 1633079383@qq.com
+    #    password: lablmdsioasgfdhi
+    #330 psw mjcwhtgzxcelchhi
+    username: 1633079383@qq.com
+    password: ecwlotnyumexcaeb
+    host: smtp.qq.com
+    properties.mail.smtp.ssl.enable: true
+  #数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.46.153.69:3306/purpleairs.com?serverTimezone=Asia/Shanghai
+    username: purpleairs.com
+    password: A2RNfacNKBzH8dXP
+
+    #配置mp 的日志输出
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+    #druid连接池配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+
+    #配置监控统计拦截的filters，stat：监控统计、log4j：日志记录、wall：防御sql注入
+    #如果允许报错，java.lang.ClassNotFoundException: org.apache.Log4j.Properity
+    #则导入log4j 依赖就行
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionoProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+    #thymeleaf模板配置
+  thymeleaf:
+    #只需要关闭缓存就好,其他的都有默认配置
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    mode: HTML
+    check-template-location: true
+      #    spring.thymeleaf.prefix=classpath:/templates/
+      #spring.thymeleaf.suffix=.html
+      #spring.thymeleaf.cache=false
+    #spring.thymeleaf.servlet.content-type=text/html
+    #spring.thymeleaf.enabled=true
+    #spring.thymeleaf.encoding=UTF-8
+    #spring.thymeleaf.mode=HTML
+    #spring.thymeleaf.check-template-location=true
+
+
+
+server:
+  port: 80
+
+#image 中虚拟路径映射的本地路径
+mogu:
+  picture:
+    upload: D:\mogu    #定义文件上传的路径,真实地址
+    mapping: /store/image
+
+alipay:
+  app_id: 2021000118638281
+  merchant_private_key: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCIynafS7nX1vmGxAmAbH6n6BfWG24d5GLsqhWe8NwyWFMo+nYf7uEoZhKAsKQgUV6ZTzSwda12gQcfjibhT2G/KDvfM21Ah7MbHoqH0W3jMi9T6VIlNcQi9NbMqfy4qdOhA4aAsWz/uXAWqSXW3fCy/J1ipD1Or9sBUR3juNBnUanY28omZ0r8qbU3qiRcUsmPVE1/l0F+sGeifAv8U28yNKz5nxAviE6PW+tIfj75boHtRBGoRxv715CO+mmEZ1Aa4djhmPowoG4lvz+AbIwnGnIxjcn2gL4RZLctQYxuf1GHBmoUnCTyXfGh/jtXPlxQd5uLAFzlj4q9oHSq5HKdAgMBAAECggEAUqZyUgGBQqbDkef1DcGALZeQf2+Hc0xBcVm7QpOpmEnBxWq/4L+HD8/MsjEImfZQQDWZUl1n98gyM6DCYTSDjOqUcmIySuEzGNm1PicOTE5QRlUdqxn3bl+dQYAcEL+b/ReSN0P85e53iVmeYVssShlURvuRh2+91efbNXK/iQzuaEpl6KgqRfwh3NuX71fXS0wONIJdmYq5Ywwf+/fBkxa2XDIHTLWVGlSLKy9lUSBkJZV4Fdr+mSKBeSt3rHIGYPcbLyIxOknLRULbDK3humZWpYeBWrb0fSnuQJ5uYTMKPwDA3DEP4TifW77UxLfD/2E3ZfmH1BMkNfb+xJypCQKBgQDAT5+/eQ6vGbssXf195dtxHBc6GROcymHnDRTPrmCAXNiZ9qFxd9PpaLm7zBmkO2+s2dakkPVCPxIfkzffngvGQRSElDhM5CIwe225TwhhGd9qhQ+hnoF/N7Wfi8TCtOqC444MOafBPCwIQKCPN4OBO9SbC9XBoA8a9HyFsJLg6wKBgQC2F8TgxvxZBlTTCTILGniYeM17CxHpLpHzqV7JH7ngRNOuCS5/mnbgKr9fIm+KOi0w3aDgZEwyfNn1DVANLZqAgkunZsat0Bm2oY0XJ1AV2EGUJUU7+FA+bEFO00AZ7oh9EDEPEShQ0bg2FBHIfsL1Tt2H4OXb+bnYAcC3oJNYlwKBgFc0RAY5SNVR37RQsqAiWQ3DZSztLh2NEDQLlIJQWmYatAWs9qxTX/6ZhI+KD56PbSZ+aXyaVvzBSOCUi2OVcVVnMXylEZqcYHyHm8vJ8MzHRK4yxFHPZH1hr7Q3VvPLwgO0WDdm9ZEEThs34xbOX418qf3csgNpJzBb6RNebFwdAoGASM0z/5JO7eDkJQO2KE5LDNqvfJQucwYVgE+k/9BZZlreLuSo3IeLI5Cztnt0ENW1n6XcXhp7hGv6UEkkSkCDVwHA8YrbwD5FKYlpeWpUUIeHoI1OIu3iVzK84aEALd36X9YLZzS646UVezmG6pwTojQHyf2WqN4s+TmqLUBb6L0CgYEAqz/IFYHE4Pm4M4mBwYvf50pXTbYf3LOR9IbJ1OxIZavHWm8GhalK5JRAIIW8RhMWVCjj7rQKgBfFoVw0dCHytb/0kFHN9KZ/pEppceEFsZyuywIMv6ydRu2UDjq//4/OniIiORYpk4iHP8SffJID0Np8x6MV4+ADsH65sQLuPIc=
+  alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs3BRcotuONglGUSemm8bwvdsDgZn62gKMsnD1fVa672zrFCRMd2CSZ9C7X0+puefKE2v4WglmCJnPjP9N2gUHPTB+DJF6NvNuBFJwkNFXcADKgVkR/dpZnz+iLS0hok44Zz0Lm7QgMfpz69ELDbZuJ6DJiMm+dhRBlGYe1BC2JrftvXeIzXKv/WtO7DdD+H6/4KZ5654ILAlrlIRn7NINmWi+3HxtcTEQbxKEBPflNBQ3fUELUXBHvSwVE8tmt7FrPwXrURnTvPrL8+N+EbvoHJxq8wlpubzRX+p9+NDKndLW/WK02s0zhTMMpVAwWs4Lx+uqqoQdEs5QFLNB/dSHQIDAQAB
+  return_url: http://localhost:80/alipay/return_url
+  gatewayUrl: https://openapi.alipaydev.com/gateway.do
+
+
+#上线环境 mogu.picture.upload
+#mogu:
+#  picture:
+#    upload: /www/wwwroot    #定义文件上传的路径,真实地址
+#    mapping: /store/image
+
+

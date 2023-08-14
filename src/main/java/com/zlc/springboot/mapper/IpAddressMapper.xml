@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlc.springboot.mapper.IpAddressMapper">
+    <resultMap id="BaseResultMap" type="com.zlc.springboot.model.IpAddress">
+        <result column="ipid" jdbcType="INTEGER" property="ipid"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="ipToTime" jdbcType="TIMESTAMP" property="iptotime"/>
+        <result column="ipState" jdbcType="VARCHAR" property="ipstate"/>
+    </resultMap>
+    <resultMap id="pvMap" type="java.util.Map">
+        <result column="count" property="count"/>
+        <result column="time" property="time"/>
+    </resultMap>
+
+    <!--  监控每六小时的人数,发送邮箱到指定的数组邮箱中-->
+    <select id="selectCountByDay" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(1) from tb_ipaddress where date_format(ipToTime,'%Y-%m-%d') = #{date}
+  </select>
+    <!--  2.统计网站PV   -->
+    <select id="selectPV" resultMap="pvMap">
+        select COUNT(*) as count,date(ipToTime)  as time from tb_ipaddress  where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(ipToTime) GROUP BY time
+    </select>
+    <!--  3.统计网站Uv  -->
+    <select id="selectUv" resultMap="pvMap">
+        select COUNT(*) as count ,date(ipToTime) as time from tb_ipaddress  where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(ipToTime) GROUP BY time,address
+    </select>
+
+
+    <insert id="insert" parameterType="com.zlc.springboot.model.IpAddress">
+    insert into tb_ipaddress (ipid, address, ipToTime, 
+      ipState,country)
+    values (#{ipid,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{iptotime,jdbcType=TIMESTAMP}, 
+      #{ipstate,jdbcType=VARCHAR},#{country})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zlc.springboot.model.IpAddress">
+        insert into tb_ipaddress
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ipid != null">
+                ipid,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="iptotime != null">
+                ipToTime,
+            </if>
+            <if test="ipstate != null">
+                ipState
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ipid != null">
+                #{ipid,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="iptotime != null">
+                #{iptotime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ipstate != null">
+                #{ipstate,jdbcType=VARCHAR},
+            </if>
+
+        </trim>
+    </insert>
+</mapper>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlc.springboot.mapper.NeedMapper">
+  <resultMap id="BaseResultMap" type="com.zlc.springboot.model.Need">
+    <id column="needid" jdbcType="INTEGER" property="needid" />
+    <result column="needname" jdbcType="VARCHAR" property="needname" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="contacts" jdbcType="VARCHAR" property="contacts" />
+    <result column="telphone" jdbcType="INTEGER" property="telphone" />
+    <result column="wechatnum" jdbcType="VARCHAR" property="wechatnum" />
+    <result column="needdate" jdbcType="TIMESTAMP" property="timestamp" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zlc.springboot.model.Need">
+    <result column="specefication" jdbcType="LONGVARCHAR" property="specefication" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    needid, needname, company, price, contacts, telphone, wechatnum
+  </sql>
+  <sql id="Blob_Column_List">
+    specefication
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_need
+    where needid = #{needid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_need
+    where needid = #{needid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlc.springboot.model.Need">
+    insert into tb_need (needid, needname, company, 
+      price, contacts, telphone, 
+      wechatnum, specefication)
+    values (#{needid,jdbcType=INTEGER}, #{needname,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{contacts,jdbcType=VARCHAR}, #{telphone,jdbcType=INTEGER}, 
+      #{wechatnum,jdbcType=VARCHAR}, #{specefication,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlc.springboot.model.Need">
+    insert into tb_need
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="needid != null">
+        needid,
+      </if>
+      <if test="needname != null">
+        needname,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="contacts != null">
+        contacts,
+      </if>
+      <if test="telphone != null">
+        telphone,
+      </if>
+      <if test="wechatnum != null">
+        wechatnum,
+      </if>
+      <if test="specefication != null">
+        specefication,
+      </if>
+      <if test="needdate != null">
+        needdate
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="needid != null">
+        #{needid,jdbcType=INTEGER},
+      </if>
+      <if test="needname != null">
+        #{needname,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="contacts != null">
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=INTEGER},
+      </if>
+      <if test="wechatnum != null">
+        #{wechatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="specefication != null">
+        #{specefication,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="needdate != null">
+        #{needdate}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlc.springboot.model.Need">
+    update tb_need
+    <set>
+      <if test="needname != null">
+        needname = #{needname,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="contacts != null">
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=INTEGER},
+      </if>
+      <if test="wechatnum != null">
+        wechatnum = #{wechatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="specefication != null">
+        specefication = #{specefication,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where needid = #{needid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zlc.springboot.model.Need">
+    update tb_need
+    set needname = #{needname,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=INTEGER},
+      wechatnum = #{wechatnum,jdbcType=VARCHAR},
+      specefication = #{specefication,jdbcType=LONGVARCHAR}
+    where needid = #{needid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlc.springboot.model.Need">
+    update tb_need
+    set needname = #{needname,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=INTEGER},
+      wechatnum = #{wechatnum,jdbcType=VARCHAR}
+    where needid = #{needid,jdbcType=INTEGER}
+  </update>
+</mapper>

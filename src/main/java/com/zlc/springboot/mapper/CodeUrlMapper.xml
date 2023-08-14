@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlc.springboot.mapper.CodeUrlMapper">
+  <resultMap id="BaseResultMap" type="com.zlc.springboot.model.CodeUrl">
+    <id column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
+    <result column="code_url" jdbcType="VARCHAR" property="codeUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    out_trade_no, code_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_codeurl
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_codeurl
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlc.springboot.model.CodeUrl">
+    insert into tb_codeurl (out_trade_no, code_url)
+    values (#{outTradeNo,jdbcType=VARCHAR}, #{codeUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlc.springboot.model.CodeUrl">
+    insert into tb_codeurl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="outTradeNo != null">
+        out_trade_no,
+      </if>
+      <if test="codeUrl != null">
+        code_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="outTradeNo != null">
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="codeUrl != null">
+        #{codeUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlc.springboot.model.CodeUrl">
+    update tb_codeurl
+    <set>
+      <if test="codeUrl != null">
+        code_url = #{codeUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlc.springboot.model.CodeUrl">
+    update tb_codeurl
+    set code_url = #{codeUrl,jdbcType=VARCHAR}
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </update>
+</mapper>
